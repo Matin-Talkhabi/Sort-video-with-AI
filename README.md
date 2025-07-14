@@ -74,8 +74,8 @@ Replace `<baseUrl>`, `<LIARA_API_KEY>`, and `<model_name>` with your own values.
 
 ```
 MyVideos/
-├── overlordkaguya sama - 01.mkv
-├── overlordkaguya sama - 02.mkv
+├── kaguya sama - 01.mkv
+├── kaguya sama - 02.mkv
 ├── konosuba - 01.mp4
 ├── overlord - 01.mkv
 ├── overlord - 02.mkv
@@ -102,8 +102,8 @@ python sortvideo.py
 Suppose you have the following files:
 
 ```
-overlordkaguya sama - 01.mkv
-overlordkaguya sama - 02.mkv
+kaguya sama - 01.mkv
+kaguya sama - 02.mkv
 konosuba - 01.mp4
 overlord - 01.mkv
 overlord - 02.mkv
@@ -113,9 +113,9 @@ After running the script, the files will be organized as follows:
 
 ```
 MyVideos/
-├── overlordkaguya sama/
-│   ├── overlordkaguya sama - 01.mkv
-│   └── overlordkaguya sama - 02.mkv
+├── kaguya sama/
+│   ├── kaguya sama - 01.mkv
+│   └── kaguya sama - 02.mkv
 ├── konosuba/
 │   └── konosuba - 01.mp4
 ├── overlord/
@@ -137,7 +137,7 @@ MyVideos/
 
 - If you enter incorrect model or connection info, the script will fail.
 - If you leave the model field blank, the default (`openai/gpt-4o-mini`) will be used.
-- For testing, you can use anime names like `overlordkaguya sama`, `konosuba`, and `overlord`.
+- For testing, you can use anime names like `kaguya sama`, `konosuba`, and `overlord`.
 
 ---
 
