@@ -1,14 +1,14 @@
 # AI Video Sorter
 
-این پروژه به شما کمک می‌کند فایل‌های ویدیویی خود را به صورت خودکار و هوشمند بر اساس نام انیمه یا دسته‌بندی دلخواه، مرتب و پوشه‌بندی کنید. این کار با کمک مدل‌های هوش مصنوعی لیارا و API آن انجام می‌شود.
+This project helps you automatically and intelligently organize your video files into folders based on anime names or any other category, using Liara's AI models and API.
 
 ---
 
-## پیش‌نیازها
+## Prerequisites
 
-- پایتون ۳.۸ یا بالاتر
-- ساخت یک مدل هوش مصنوعی در لیارا و دریافت اطلاعات اتصال (base_url، api_key، model)
-- نصب پکیج مورد نیاز:
+- Python 3.8 or higher
+- Create an AI model in Liara and obtain the connection info (base_url, api_key, model)
+- Install the required package:
 
 ```bash
 pip install openai
@@ -16,15 +16,15 @@ pip install openai
 
 ---
 
-## راه‌اندازی مدل هوش مصنوعی در لیارا
+## Setting Up Your AI Model in Liara
 
-۱. وارد پنل لیارا شوید و یک سرویس هوش مصنوعی ایجاد کنید.
-۲. پس از ساخت مدل، اطلاعات زیر را یادداشت کنید:
-   - **base_url** (آدرس سرویس)
-   - **api_key** (کلید API)
-   - **model** (نام مدل، مثلاً: `openai/gpt-4o-mini`)
+1. Log in to your Liara panel and create an AI service.
+2. After creating the model, note the following information:
+   - **base_url** (service address)
+   - **api_key** (API key)
+   - **model** (model name, e.g., `openai/gpt-4o-mini`)
 
-نمونه کد اتصال به مدل:
+Sample code to connect to your model:
 
 ```python
 from openai import OpenAI
@@ -47,30 +47,30 @@ completion = client.chat.completions.create(
 print(completion.choices[0].message.content)
 ```
 
-در کد بالا، `<baseUrl>`، `<LIARA_API_KEY>` و `<model_name>` را با مقادیر خود جایگزین کنید.
+Replace `<baseUrl>`, `<LIARA_API_KEY>`, and `<model_name>` with your own values.
 
 ---
 
-## پارامترهای قابل تنظیم در OpenAI SDK
+## Configurable Parameters in OpenAI SDK
 
-- **frequency_penalty**: عددی بین -2 تا 2. کنترل تکرار کلمات.
-- **logit_bias**: تغییر احتمال ظاهر شدن توکن‌های خاص.
-- **n**: تعداد پاسخ‌های همزمان.
-- **response_format**: فرمت خروجی خاص.
-- **seed**: مقدار ثابت برای تکرارپذیری.
-- **stop**: آرایه‌ای از رشته‌ها برای توقف پاسخ.
-- **stream**: فعال‌سازی حالت استریم.
-- **stream_options**: تنظیمات حالت استریم.
-- **temperature**: عددی بین 0 تا 2. کنترل خلاقیت.
-- **tool_choice**: تعیین زمان فراخوانی Tool.
-- **tools**: تعریف Toolهای قابل استفاده.
-- **user**: شناسه کاربر نهایی.
+- **frequency_penalty**: Number between -2 and 2. Controls repetition of frequent words.
+- **logit_bias**: Adjusts the likelihood of specific tokens appearing.
+- **n**: Number of responses to generate simultaneously.
+- **response_format**: Forces the model to return output in a specific format.
+- **seed**: Fixed value for reproducible outputs.
+- **stop**: Array of strings; model stops generating when it encounters them.
+- **stream**: If true, responses are streamed (useful for real-time or UI).
+- **stream_options**: Stream settings (used only if stream: true).
+- **temperature**: Number between 0 and 2. Controls randomness/creativity.
+- **tool_choice**: Controls when the model calls a Tool (smart/always).
+- **tools**: Define a set of Tools the model can use if needed.
+- **user**: End-user identifier for better request tracking and abuse prevention.
 
 ---
 
-## نحوه اجرا و استفاده از پروژه
+## How to Run and Use the Project
 
-۱. فایل‌های ویدیویی خود را در یک پوشه قرار دهید. مثال:
+1. Place your video files in a folder. Example:
 
 ```
 MyVideos/
@@ -81,25 +81,25 @@ MyVideos/
 ├── overlord - 02.mkv
 ```
 
-۲. اسکریپت `sortvideo.py` را اجرا کنید:
+2. Run the `sortvideo.py` script:
 
 ```bash
 python sortvideo.py
 ```
 
-۳. اطلاعات زیر از شما پرسیده می‌شود:
+3. You will be prompted for:
    - base_url
    - api_key
-   - model (در صورت خالی گذاشتن، مقدار پیش‌فرض استفاده می‌شود)
-   - مسیر پوشه ویدیوها
+   - model (if left blank, the default will be used)
+   - path to your video folder
 
-۴. اسکریپت به صورت خودکار لیست ویدیوها را به مدل هوش مصنوعی می‌فرستد و بر اساس پاسخ، فایل‌ها را در پوشه‌هایی با نام هر انیمه مرتب می‌کند.
+4. The script will automatically send the list of videos to the AI model and, based on the response, organize the files into folders named after each anime.
 
 ---
 
-## مثال تستی
+## Test Example
 
-فرض کنید فایل‌های زیر را دارید:
+Suppose you have the following files:
 
 ```
 kaguya sama love is war - 01.mkv
@@ -109,7 +109,7 @@ overlord - 01.mkv
 overlord - 02.mkv
 ```
 
-پس از اجرا، فایل‌ها به صورت زیر مرتب می‌شوند:
+After running the script, the files will be organized as follows:
 
 ```
 MyVideos/
@@ -125,20 +125,20 @@ MyVideos/
 
 ---
 
-## توضیحات کد
+## Code Overview
 
-- `sortvideo.py`: اسکریپت اصلی برای مرتب‌سازی ویدیوها با کمک هوش مصنوعی.
-- `AI.py`: ماژول ارتباط با API لیارا و ارسال پرامپت به مدل هوش مصنوعی.
-- همه چیز به صورت اتوماتیک انجام می‌شود و نیازی به ویرایش دستی فایل‌ها نیست.
-
----
-
-## نکات تکمیلی
-
-- اگر مدل یا اطلاعات اتصال را اشتباه وارد کنید، اسکریپت خطا می‌دهد.
-- اگر مقدار مدل را خالی بگذارید، مقدار پیش‌فرض (`openai/gpt-4o-mini`) استفاده می‌شود.
-- برای تست، می‌توانید از نام انیمه‌های `kaguya sama love is war`، `konosuba` و `overlord` استفاده کنید.
+- `sortvideo.py`: The main script for sorting videos using AI.
+- `AI.py`: Handles communication with the Liara API and sends prompts to the AI model.
+- Everything is fully automated; no manual file editing is required.
 
 ---
 
-موفق باشید! 🚀 
+## Additional Notes
+
+- If you enter incorrect model or connection info, the script will fail.
+- If you leave the model field blank, the default (`openai/gpt-4o-mini`) will be used.
+- For testing, you can use anime names like `kaguya sama love is war`, `konosuba`, and `overlord`.
+
+---
+
+Good luck! 🚀 
